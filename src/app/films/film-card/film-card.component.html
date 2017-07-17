@@ -1,0 +1,36 @@
+<md-card class="film-card" 
+	*ngIf="filmItem">
+	<img 
+		md-card-image 
+		[alt]="filmItem.title" 
+		[src]="'https://image.tmdb.org/t/p/' + pictureSize + filmItem.poster_path">
+	<md-card-content>
+		<md-card-title>
+			{{filmItem.title}}
+		</md-card-title>
+		<div class="film-card__item">
+			<span>Рейтинг:</span>
+			{{filmItem.vote_average}}
+			<md-icon *ngIf="filmItem.vote_average >= 7">thumb_up</md-icon>
+		</div>
+		<div class="film-card__item">
+			<span>Релиз:</span> 
+			{{filmItem.release_date}}
+		</div>
+		<div class="film-card__item">
+			<span 
+				class="film-card__genre" 
+				*ngFor = "let genre of filmItem.genres">
+				{{genre.name}} 
+			</span> 
+		</div>
+		<div class="film-card__description">{{filmItem.overview}}</div>
+	</md-card-content>
+	<md-card-actions>
+		<a 
+			md-button 
+			[routerLink]="'/filmList/' + filmItem.id">
+			Подробнее
+		</a>
+	</md-card-actions>
+</md-card>

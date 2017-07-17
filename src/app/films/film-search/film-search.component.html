@@ -1,0 +1,9 @@
+<form class="film-search">
+  <md-input-container class="film-search__input-wrap">
+    <input mdInput 
+      placeholder="Choose your film" 
+      name="filmName" 
+      [(ngModel)]="filmName" 
+      (keyup.enter)="getFilms()">
+  </md-input-container>
+</form>

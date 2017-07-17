@@ -1,0 +1,35 @@
+.film-card {
+  max-width: 300px;
+  margin-bottom: 50px; 
+}
+
+.film-card__item {
+  margin-bottom: 10px;
+}
+
+[md-card-image] {
+  max-height: 500px;
+}
+
+md-card-content span {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+md-card-content span.film-card__genre  {
+  font-weight: normal;
+  color: #777;
+}
+
+md-icon {
+  position: relative;
+  top: 3px;
+  left: 5px;
+  font-size: 18px;
+  color: #777;
+}
+
+.film-card__description {
+  max-height: 50px;
+  overflow: hidden;
+}

@@ -1,0 +1,48 @@
+.details-wrap {
+    display: flex;
+    flex-direction: row;
+    min-width: 400px;
+    justify-content: flex-start;
+}
+
+.filmDetails__filmName {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+.filmDetails__wrap {
+    padding-left: 30px;
+    font-size: 18px;
+}
+
+.heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+.heading:first-child {
+    margin-top: 0;
+}
+
+.actors-card {
+    width: 185px;
+}
+
+.actorsList {
+    margin: 30px 0;
+}
+
+.actorsList__heading {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 30px 0;
+}
+
+.actorsList__actor-name {
+    font-weight: bold;
+}
+
+

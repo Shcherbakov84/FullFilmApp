@@ -1,0 +1,40 @@
+<div class="app-content">
+	<md-select 
+		placeholder="Type of view" 
+		[(ngModel)]="selectedView" 
+		name="cardView">
+		<md-option 
+			*ngFor="let cardView of cardViews" 
+			[value]="cardView.value">
+			{{ cardView.viewValue }}
+		</md-option>
+	</md-select>
+	
+	<div [ngSwitch]="selectedView">
+		<md-card *ngIf="isFilmListEmpty()">Извините, фильмы не найдены..</md-card>
+		
+		<md-grid-list 
+			*ngSwitchCase="'view1'" 
+			cols="3" 
+			rowHeight="850px">
+			<md-grid-tile  *ngFor="let film of filmList">
+				<film-card [filmId]="film.id"></film-card>
+			</md-grid-tile>
+		</md-grid-list>
+
+		<md-grid-list 
+			*ngSwitchCase="'view2'" 
+			cols="2" 
+			rowHeight="350px">
+			<md-grid-tile *ngFor="let film of filmList">
+				<film-tile [filmId]="film.id"></film-tile>
+			</md-grid-tile>
+		</md-grid-list>
+	</div>
+
+	<button class="next-btn" md-fab>
+		<md-icon class="next-btn__icon" 
+			(click)="addPopularFilms()">skip_next
+		</md-icon>
+	</button>
+</div>

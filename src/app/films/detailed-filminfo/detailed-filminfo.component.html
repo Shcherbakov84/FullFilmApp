@@ -1,0 +1,49 @@
+<div *ngIf="filmDetails">
+  <div class="filmDetails__filmName">{{filmDetails.title}}</div>
+  <div class="details-wrap">
+    <img
+      [alt]="filmDetails.title" 
+      [src]="'https://image.tmdb.org/t/p/' + posterSize + filmDetails.poster_path">
+    <div class="filmDetails__wrap">
+      <div class="heading">Оригинальное название</div>
+      <span class="content">{{filmDetails.original_title}}</span>
+
+      <div class="heading">Слоган</div>
+      <span class="content">{{filmDetails.tagline}}</span>
+
+      <div class="heading">Описание</div>
+      <span class="content">{{filmDetails.overview}}</span>    
+    </div>
+  </div>
+</div>
+
+<div class="actorsList"
+  *ngIf="actorsShortList">
+  <div class="actorsList__heading">Актеры</div>
+  <md-grid-list 
+    cols="5" 
+    rowHeight="500px">
+    
+    <md-grid-tile *ngFor="let actor of actorsShortList">
+      <md-card class="actors-card">
+        <img 
+          md-card-image 
+          [src]="'https://image.tmdb.org/t/p/' + actorImgSize + actor.profile_path"
+          [alt]="actor.name">
+        <md-card-content>
+          <div class="actorsList__actor-name">{{actor.name}}</div>
+          <div>{{actor.character}}</div>
+        </md-card-content>
+        <md-card-actions>
+          <button 
+            class="actorDetails-btn" 
+            md-button>
+              Подробнее
+          </button>
+        </md-card-actions>
+      </md-card>
+    </md-grid-tile>
+
+  </md-grid-list>
+</div>
+

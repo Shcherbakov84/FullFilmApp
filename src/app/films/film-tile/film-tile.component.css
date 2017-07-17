@@ -1,0 +1,70 @@
+.film-tile {
+  display: flex;
+  flex-direction: row;
+  height: 300px;
+  max-width: 550px;
+  min-width: 400px;
+  margin-bottom: 50px; 
+  border: 1px solid #eee;
+  position: relative;
+}
+
+.film-tile .wrapper {
+  margin: 10px 0;
+}
+
+.film-tile__img {
+  background-color: #fff;
+}
+
+.film-tile__img img {
+  width: 200px;
+  max-height: 100%;
+}
+
+.film-tile__wrap {
+  background-color: #fff;
+  padding-left: 10px;
+}
+
+.film-tile__info {
+  max-height: 235px;
+  overflow: hidden;
+}
+
+.film-tile__title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.film-tile__info span {
+  font-weight: bold;
+  padding-right: 5px;
+}
+
+.film-tile__plot {
+  padding-right: 5px;
+}
+
+.wrapper .film-tile__genres {
+  color: #777;
+  font-weight: normal;
+}
+
+md-icon {
+  position: relative;
+  top: 3px;
+  left: 5px;
+  font-size: 18px;
+  color: #777;
+}
+
+.film-tile__plot {
+  font-size: 14px;
+}
+
+.infoBtn {
+  position: absolute;
+  bottom: 15px;
+  border: 1px solid #777; 
+}
