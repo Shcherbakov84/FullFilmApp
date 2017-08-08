@@ -1,4 +1,7 @@
 <div class="app-content">
+
+	<film-search (searchEvent)="buildGalleryBySearch($event)"></film-search>
+	
 	<md-select 
 		placeholder="Type of view" 
 		[(ngModel)]="selectedView" 
@@ -34,7 +37,7 @@
 
 	<button class="next-btn" md-fab>
 		<md-icon class="next-btn__icon" 
-			(click)="addPopularFilms()">skip_next
+			(click)="addFilms()">skip_next
 		</md-icon>
 	</button>
 </div>

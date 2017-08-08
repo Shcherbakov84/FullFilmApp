@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FilmService} from '../../shared/film.service';
+import { FilmService } from '../../shared/film.service';
 
 @Component({
   selector: 'film-list',
@@ -15,13 +15,16 @@ export class FilmListComponent implements OnInit {
   selectedView: string;
   filmList: object[];
   filmName: string; 
+  isFilmNameBySearch: boolean;
 
   constructor(private filmCardService: FilmService) { }
 
   ngOnInit() {
     this.selectedView = this.cardViews[0].value;
+    this.isFilmNameBySearch = false;
     this.filmList = [];
-    this.getPopular();
+    this.getPopularFilms();
+
   }
 
   isFilmListEmpty(): boolean {
@@ -33,21 +36,30 @@ export class FilmListComponent implements OnInit {
   }
 
   getFilmsBySearch(filmName: string) {
-    this.filmCardService.getFilmsBySearch(filmName).subscribe( (filmsArray) => {
-      this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [];
-    })
+    this.filmCardService.getFilmsBySearch(filmName)
+      .subscribe( (filmsArray) => this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [] );
   }
 
-  addPopularFilms() {
-    this.filmCardService.getPopularNextPage().subscribe( (filmsList: object[] ) => {
-      this.filmList.push(...filmsList);
-    })
+  addFilms() {
+    if (this.isFilmNameBySearch) {
+      this.filmCardService.getNextSearchedFilms(this.filmName)
+        .subscribe( (filmsList: object[]) => this.filmList.push(...filmsList) );
+    } else {
+      this.filmCardService.getNextPopularFilms()
+        .subscribe( (filmsList: object[]) => this.filmList.push(...filmsList) );
+    }
   }
 
-  getPopular() {
-    this.filmCardService.getPopular().subscribe( (filmsArray: object[] ) => {
-      this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [];
-    })
+  getPopularFilms() {
+    this.filmCardService.getPopularFilms()
+      .subscribe( (filmsArray: object[] ) => this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [] )
+  }
+
+  buildGalleryBySearch(filmName: string) {
+    this.filmName = filmName;
+    this.getFilmsBySearch(this.filmName);
+    this.isFilmNameBySearch = true;
+    this.filmCardService.searchedFilmsPage = 1;
   }
 }
  
