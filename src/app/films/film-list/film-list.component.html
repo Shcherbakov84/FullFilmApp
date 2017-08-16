@@ -7,6 +7,7 @@
 		[(ngModel)]="selectedView" 
 		name="cardView">
 		<md-option 
+			(click)="setTypeOfView()"
 			*ngFor="let cardView of cardViews" 
 			[value]="cardView.value">
 			{{ cardView.viewValue }}
@@ -17,7 +18,7 @@
 		<md-card *ngIf="isFilmListEmpty()">Извините, фильмы не найдены..</md-card>
 		
 		<md-grid-list 
-			*ngSwitchCase="'view1'" 
+			*ngSwitchCase="'card'" 
 			cols="3" 
 			rowHeight="850px">
 			<md-grid-tile  *ngFor="let film of filmList">
@@ -26,7 +27,7 @@
 		</md-grid-list>
 
 		<md-grid-list 
-			*ngSwitchCase="'view2'" 
+			*ngSwitchCase="'tile'" 
 			cols="2" 
 			rowHeight="350px">
 			<md-grid-tile *ngFor="let film of filmList">

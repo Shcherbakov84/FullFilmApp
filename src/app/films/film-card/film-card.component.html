@@ -1,6 +1,6 @@
 <md-card class="film-card" 
 	*ngIf="filmItem">
-	<img 
+	<img *ngIf="filmItem.poster_path"
 		md-card-image 
 		[alt]="filmItem.title" 
 		[src]="'https://image.tmdb.org/t/p/' + pictureSize + filmItem.poster_path">
@@ -12,6 +12,11 @@
 			<span>Рейтинг:</span>
 			{{filmItem.vote_average}}
 			<md-icon *ngIf="filmItem.vote_average >= 7">thumb_up</md-icon>
+			<md-icon 
+				*ngIf="isFilmFavorite()"
+				class="favorite-active">
+					favorite
+			</md-icon>
 		</div>
 		<div class="film-card__item">
 			<span>Релиз:</span> 

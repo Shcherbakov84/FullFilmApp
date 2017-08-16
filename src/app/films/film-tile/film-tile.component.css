@@ -44,6 +44,13 @@
 
 .film-tile__plot {
   padding-right: 5px;
+  font-size: 14px;
+}
+
+.film-tile__overview {
+  height: 90px;
+  padding-right: 10px;
+  overflow: hidden;
 }
 
 .wrapper .film-tile__genres {
@@ -59,8 +66,8 @@ md-icon {
   color: #777;
 }
 
-.film-tile__plot {
-  font-size: 14px;
+.favorite-active {
+  color: #c00;
 }
 
 .infoBtn {

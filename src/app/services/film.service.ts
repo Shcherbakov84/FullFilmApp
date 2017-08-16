@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 export class FilmService {
   url: string = 'https://api.themoviedb.org';
   apiKey: string = '0077bec633f957fbf7cd91c9c7026b27';
-  popularFilmspage: number = 1;
-  searchedFilmsPage: number = 1;
   language: string = 'ru-RU';
   
   constructor(private http: Http) { }
@@ -22,26 +20,16 @@ export class FilmService {
     return this.http.get(url).map(this.extract);
   }
 
-  getFilmsBySearch(filmname: string) {
-    return this.get(`${this.url}/3/search/movie?page=1&language=${this.language}&api_key=${this.apiKey}&query=${filmname}`);
+  getFilmsBySearch(filmname: string, page: number = 1) {
+    return this.get(`${this.url}/3/search/movie?page=${page}&language=${this.language}&api_key=${this.apiKey}&query=${filmname}`);
   }
 
   getFilmById(filmId: number) {
     return this.get(`${this.url}/3/movie/${filmId}?language=${this.language}&api_key=${this.apiKey}`);
   }
 
-  getPopularFilms() {
-    return this.get(`${this.url}/3/movie/popular?page=1&language=${this.language}&api_key=${this.apiKey}`);
-  }
-
-  getNextPopularFilms() {
-    this.popularFilmspage++;
-    return this.get(`${this.url}/3/movie/popular?page=${this.popularFilmspage}&language=${this.language}&api_key=${this.apiKey}`);
-  }
-
-  getNextSearchedFilms(filmname: string) {
-    this.searchedFilmsPage++;
-    return this.get(`${this.url}/3/search/movie?page=${this.searchedFilmsPage}&language=${this.language}&api_key=${this.apiKey}&query=${filmname}`);
+  getPopularFilms(page: number = 1) {
+    return this.get(`${this.url}/3/movie/popular?page=${page}&language=${this.language}&api_key=${this.apiKey}`);
   }
 
   getActors(filmId: number) {

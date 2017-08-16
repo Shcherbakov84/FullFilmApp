@@ -6,7 +6,8 @@
   </button>
   <div class="toolbar-button-row">
     <a md-button
-      *ngFor="let topLink of links" href='{{topLink.path}}'>
+      *ngFor="let topLink of links" 
+      [routerLink]="topLink.path">
       <md-icon>{{topLink.icon}}</md-icon>
       <span>{{topLink.label}}</span>
     </a>
@@ -20,7 +21,7 @@
       <a md-button
         class="nav-link"
         *ngFor="let link of links"
-        href="link.path">
+        [routerLink]="link.path">
         <md-icon>{{link.icon}}</md-icon> 
         <span>{{link.label}}</span>
       </a>

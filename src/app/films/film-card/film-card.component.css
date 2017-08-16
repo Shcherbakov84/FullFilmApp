@@ -33,3 +33,7 @@ md-icon {
   max-height: 50px;
   overflow: hidden;
 }
+
+.favorite-active {
+  color: #c00;
+}

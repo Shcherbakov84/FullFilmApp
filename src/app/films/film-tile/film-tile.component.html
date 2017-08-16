@@ -1,5 +1,6 @@
 <div class="film-tile" *ngIf="filmItem">
-	<div class="film-tile__img">
+	<div *ngIf="filmItem.poster_path"
+		class="film-tile__img">
 		<img 
 			[alt]="filmItem.title" 
 			[src]="'https://image.tmdb.org/t/p/' + pictureSize + filmItem.poster_path">
@@ -15,6 +16,11 @@
 				<md-icon *ngIf="filmItem.vote_average >= 7">
 					thumb_up
 				</md-icon>
+				<md-icon 
+					*ngIf="isFilmFavorite()"
+					class="favorite-active">
+						favorite
+				</md-icon>
 			</div>
 			<div class="wrapper">
 				<span>Релиз:</span>
@@ -27,11 +33,11 @@
 					{{genre.name}} 
 				</span> 
 			</div>
-			<div class="film-tile__plot wrapper">
+			<div class="film-tile__overview">
 				{{filmItem.overview}}
 			</div>
 		</div>	
-		<a 
+		<a  class="infoBtn"
 			md-button 
 			[routerLink]="'/filmList/' + filmItem.id">
 			Подробнее

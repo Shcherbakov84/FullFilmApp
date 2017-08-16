@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FilmService } from '../../shared/film.service';
+import { FilmService } from '../../services/film.service';
+import { ViewTypeService } from '../../services/view-type.service';
 
 @Component({
   selector: 'film-list',
@@ -9,22 +10,25 @@ import { FilmService } from '../../shared/film.service';
 
 export class FilmListComponent implements OnInit {
   cardViews = [
-    {value: 'view1', viewValue: 'Film Card'},
-    {value: 'view2', viewValue: 'Film Tile'}
+    {value: 'card', viewValue: 'Film Card'},
+    {value: 'tile', viewValue: 'Film Tile'}
   ];
   selectedView: string;
-  filmList: object[];
+  filmList: any[];
   filmName: string; 
+  searchedFilmsPage: number;
+  popularFilmsPage: number;
   isFilmNameBySearch: boolean;
 
-  constructor(private filmCardService: FilmService) { }
+  constructor(private filmCardService: FilmService, private viewTypeService: ViewTypeService) { }
 
   ngOnInit() {
-    this.selectedView = this.cardViews[0].value;
+    this.popularFilmsPage = 1;
+    this.searchedFilmsPage = 1;
+    this.selectedView = this.viewTypeService.getTypeOfView();
     this.isFilmNameBySearch = false;
     this.filmList = [];
     this.getPopularFilms();
-
   }
 
   isFilmListEmpty(): boolean {
@@ -35,31 +39,37 @@ export class FilmListComponent implements OnInit {
     return filmsArray && filmsArray.length;
   }
 
+  setTypeOfView() {
+    this.viewTypeService.setTypeOfView(this.selectedView);
+  }
+
   getFilmsBySearch(filmName: string) {
     this.filmCardService.getFilmsBySearch(filmName)
-      .subscribe( (filmsArray) => this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [] );
+      .subscribe( (filmList) => this.filmList = ( this.isFilledArray(filmList) ) ? filmList : [] );
   }
 
   addFilms() {
     if (this.isFilmNameBySearch) {
-      this.filmCardService.getNextSearchedFilms(this.filmName)
-        .subscribe( (filmsList: object[]) => this.filmList.push(...filmsList) );
+      this.filmCardService.getFilmsBySearch(this.filmName, ++this.searchedFilmsPage)
+        .subscribe( (filmList: any[]) => this.filmList.push(...filmList) );
     } else {
-      this.filmCardService.getNextPopularFilms()
-        .subscribe( (filmsList: object[]) => this.filmList.push(...filmsList) );
+      this.filmCardService.getPopularFilms( ++this.popularFilmsPage )
+        .subscribe( (filmList: any[]) => this.filmList.push(...filmList) );
     }
   }
 
   getPopularFilms() {
     this.filmCardService.getPopularFilms()
-      .subscribe( (filmsArray: object[] ) => this.filmList = ( this.isFilledArray(filmsArray) ) ? filmsArray : [] )
+      .subscribe( (filmList: any[] ) => this.filmList = ( this.isFilledArray(filmList) ) ? filmList : [] );
   }
 
   buildGalleryBySearch(filmName: string) {
     this.filmName = filmName;
+    this.searchedFilmsPage = 1;
     this.getFilmsBySearch(this.filmName);
     this.isFilmNameBySearch = true;
-    this.filmCardService.searchedFilmsPage = 1;
   }
 }
+
+ 
  

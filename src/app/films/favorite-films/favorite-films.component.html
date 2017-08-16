@@ -1,0 +1,10 @@
+<md-card *ngIf="isFilmListEmpty()">Извините, сохраненных фильмов не обнаружено..</md-card>
+
+<md-grid-list  
+    cols="3" 
+    rowHeight="850px">
+    <md-grid-tile  *ngFor="let id of idList">
+        <film-card [filmId]="id"></film-card>
+    </md-grid-tile>
+</md-grid-list>
+
